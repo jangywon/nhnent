@@ -48,26 +48,8 @@ public class DataDAO {
 	// update modified data
 	public int modify(NewArticleCommand article){
 		NewArticleCommand compareArticle = this.searchOne(String.valueOf(article.getNum()));
-
-		String originPassword = compareArticle.getPassword();
-		String inputPassword = article.getPassword();
-
-		System.out.println("origin Password = "+originPassword);
-		System.out.println("input Passwrod = "+inputPassword);
-//		if(inputPassword.equals(originPassword)){
-			System.out.println("====================");
-			System.out.println("password check success");
-			System.out.println("====================");
-			String sql = "update guestbook SET contents = '"+article.getContents()+"', modifydate = SYS_TIMESTAMP WHERE num = "+article.getNum()+";";
-			return jdbcTemplate.update(sql);
-//		}
-//		else{
-//
-//			System.out.println("====================");
-//			System.out.println("password check fail");
-//			System.out.println("====================");
-//			return 0;
-//		}
+		String sql = "update guestbook SET contents = '"+article.getContents()+"', modifydate = SYS_TIMESTAMP WHERE num = "+article.getNum()+";";
+		return jdbcTemplate.update(sql);
 	}
 
 
@@ -90,7 +72,6 @@ public class DataDAO {
 			}
 		};
 
-		System.out.println(jdbcTemplate.queryForObject(sql, mapper).toString());
 		return jdbcTemplate.queryForObject(sql, mapper);	
 
 	}

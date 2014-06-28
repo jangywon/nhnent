@@ -35,6 +35,5 @@ public class ModifyArticleController {
 	public void modifyUpdate(@ModelAttribute("modleAndAttribute") NewArticleCommand modleAndAttribute, HttpServletResponse response) {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DataDAO datadao = (DataDAO) ac.getBean("DataDAO");
-		
 	}
 }

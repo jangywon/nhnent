@@ -38,19 +38,12 @@ public class NewArticleController {
 		
 		if(lemp != null){
 			Iterator empIter= lemp.iterator();
-			System.out.println("======= all list ======");
 			while(empIter.hasNext()){
 				NewArticleCommand emplist = (NewArticleCommand)empIter.next();
-				System.out.println("num:"+emplist.getNum());
-				System.out.println("contents:"+emplist.getContents());
-				System.out.println("password:"+emplist.getPassword());
-				System.out.println("email:"+emplist.getEmail());
-				System.out.println("=====================");
 			}
 			modelAndView.addObject("list", lemp);
 		}
 		else{
-			System.out.println("data is empty");
 		}
 		//		new JdbcTestClient();
 		
@@ -58,7 +51,6 @@ public class NewArticleController {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	public void submit(@ModelAttribute("command") NewArticleCommand command) {
-		System.out.println("submit");
 		articleService.writeArticle(command);
 	}
 
@@ -94,7 +86,6 @@ public class NewArticleController {
 	}
 
 	public void setArticleService(ArticleService articleService) {
-		System.out.println("setArticleService");
 		this.articleService = articleService;
 	}
 
