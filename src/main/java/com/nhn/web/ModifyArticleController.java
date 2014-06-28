@@ -22,17 +22,13 @@ import com.nhn.service.NewArticleCommand;
 public class ModifyArticleController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView modifyForm(Locale locale, ModelAndView model, HttpServletRequest httpServletRequest) {
-
 		String num = String.valueOf(httpServletRequest.getParameter("num"));
 		model = new ModelAndView("modifyArticleForm");
-		
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DataDAO dataDao =(DataDAO) ac.getBean("DataDAO");
 		NewArticleCommand article = (NewArticleCommand)dataDao.searchOne(num);
 		model.addObject("article", article);
 		return model;
-		
-		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

@@ -26,16 +26,17 @@ public class DataDAO {
 	}
 
 	// insert data 
+	// 이메일, 비밀번호, 본문을 입력 받아 디비에 추가 
+
 	public int add(NewArticleCommand article){
 		boolean isValidEmail = Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", article.getEmail());
 		if(isValidEmail){
-			
 			System.out.println("E-mail Check Success");
-		//insert into guestbook(num,email,password,contents,writedate,modifydate) VALUES(NULL,'hyunsoo@ajou.ac.kr','hyunsoo', 'blade AND soul', SYS_TIMESTAMP, null)
-		String sql = "insert into guestbook (num,email,password,contents,writedate,modifydate) values (NULL, '"+article.getEmail()+"' , '"+article.getPassword()+"' , '"+article.getContents()+"' , SYS_TIMESTAMP , null );";
-		return jdbcTemplate.update(sql);
+			// 글 등록 시 현재 시각도 기록 ( TIMESTAMP ) 
+			String sql = "insert into guestbook (num,email,password,contents,writedate,modifydate) values (NULL, '"+article.getEmail()+"' , '"+article.getPassword()+"' , '"+article.getContents()+"' , SYS_TIMESTAMP , null );";
+			return jdbcTemplate.update(sql);
 		}else{
-			
+
 			System.out.println("E-mail Check Fail");
 			return 0;
 		}
@@ -48,26 +49,25 @@ public class DataDAO {
 	public int modify(NewArticleCommand article){
 		NewArticleCommand compareArticle = this.searchOne(String.valueOf(article.getNum()));
 
-
 		String originPassword = compareArticle.getPassword();
 		String inputPassword = article.getPassword();
 
 		System.out.println("origin Password = "+originPassword);
 		System.out.println("input Passwrod = "+inputPassword);
-		if(inputPassword.equals(originPassword)){
+//		if(inputPassword.equals(originPassword)){
 			System.out.println("====================");
 			System.out.println("password check success");
 			System.out.println("====================");
 			String sql = "update guestbook SET contents = '"+article.getContents()+"', modifydate = SYS_TIMESTAMP WHERE num = "+article.getNum()+";";
 			return jdbcTemplate.update(sql);
-		}
-		else{
-
-			System.out.println("====================");
-			System.out.println("password check fail");
-			System.out.println("====================");
-			return 0;
-		}
+//		}
+//		else{
+//
+//			System.out.println("====================");
+//			System.out.println("password check fail");
+//			System.out.println("====================");
+//			return 0;
+//		}
 	}
 
 
@@ -99,7 +99,6 @@ public class DataDAO {
 	public List<NewArticleCommand> searchAll(){
 
 		String sql = "select * from guestbook";
-		// RowMapper??? ResultSet??? ???????????? ????????? ??????????????? ????????? ??????.
 		RowMapper mapper = new RowMapper(){
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException{
 				NewArticleCommand article = new NewArticleCommand();

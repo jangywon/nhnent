@@ -29,6 +29,10 @@
 				+ id;
 	};
 </script>
+
+<!-- 디비에 있는 내용을 페이징 없이 출력 -->
+
+
 <body bgcolor="#222222" text="#ffffff">
 
 	<center>
@@ -37,7 +41,7 @@
 			bordercolor="#D6D4D6" align="center">
 			<tr height="40">
 				<td style="padding-left: 20px;" align="center" text="#222222">
-				<b>NHN ENTERTAINMENT 방 명 록</b></td>
+				<b>신입사원 장영원의 NHN ENTERTAINMENT 방 명 록</b></td>
 			</tr>
 		</table>
 
@@ -75,7 +79,7 @@
 				</tr>
 
 				<tr>
-					<td width="500" colspan="3" style="padding-left: 10px;"
+					<td width="1200" colspan="3" style="padding-left: 10px;"
 						align="left"><textarea name="contents" rows="3" cols="84"
 							style="height: 200px;"></textarea></td>
 				</tr>

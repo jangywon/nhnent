@@ -66,12 +66,15 @@ public class NewArticleController {
 	public void modifyData(@ModelAttribute("modleAndAttribute") ModelAndView modelAndView, NewArticleCommand modelAndAttribute, HttpServletResponse request, HttpServletResponse response){
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DataDAO dataDAO = (DataDAO) ac.getBean("DataDAO");
-		dataDAO.modify(modelAndAttribute);
+		if(dataDAO.modify(modelAndAttribute) != 0){
 		try {
 			response.sendRedirect("");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		}else{
+			
 		}
 	}
 	
